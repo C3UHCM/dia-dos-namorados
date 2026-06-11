@@ -28,10 +28,18 @@ body{
     width:100%;
     padding:40px;
     border-radius:20px;
-    border:3px solid #f9c74f;
-    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    border:4px solid #f9c74f;
+
+    box-shadow:
+        0 0 10px rgba(249,199,79,0.6),
+        0 0 20px rgba(249,199,79,0.4),
+        0 10px 30px rgba(0,0,0,0.15);
+
     position:relative;
-    animation:aparecer 1.5s ease;
+
+    animation:
+        aparecer 1.5s ease,
+        brilho 3s infinite alternate;
 }
 
 .carta::before{
@@ -42,12 +50,37 @@ body{
     font-size:40px;
 }
 
+.carta::after{
+    content:"";
+    position:absolute;
+    top:10px;
+    left:10px;
+    right:10px;
+    bottom:10px;
+    border:2px solid rgba(249,199,79,0.4);
+    border-radius:15px;
+    pointer-events:none;
+}
+.carta-envelope{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:120px;
+    background:#f9c74f;
+    clip-path:polygon(0 0, 50% 100%, 100% 0, 100% 100%, 0 100%);
+    animation:abrirEnvelope 2s forwards;
+    z-index:5;
+}
+
 h1{
     color:#f9a825;
     text-align:center;
     margin-bottom:25px;
     font-size:2.5rem;
-    text-shadow:2px 2px 5px rgba(0,0,0,0.1);
+    text-shadow:
+        0 0 10px rgba(249,199,79,0.8),
+        0 0 20px rgba(249,199,79,0.5);
 }
 
 p{
@@ -55,6 +88,36 @@ p{
     line-height:1.9;
     font-size:1.1rem;
     margin-bottom:15px;
+}
+
+.fotos{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    margin-top:25px;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+}
+
+.foto{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:15px;
+    border:4px solid #f9c74f;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    transition:0.4s;
+}
+
+.coracao-foto{
+    width:180px;
+    height:180px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:120px;
+    animation:pulsar 1.5s infinite;
 }
 
 .assinatura{
@@ -75,7 +138,8 @@ p{
 .nome{
     color:#f9a825;
     font-weight:bold;
-    font-size:1.2rem;
+    font-size:1.3rem;
+    text-shadow:0 0 10px rgba(249,199,79,0.8);
 }
 
 @keyframes pulsar{
@@ -94,6 +158,155 @@ p{
         transform:translateY(0);
     }
 }
+
+@keyframes brilho{
+    from{
+        box-shadow:
+            0 0 10px rgba(249,199,79,0.5),
+            0 0 20px rgba(249,199,79,0.3),
+            0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    to{
+        box-shadow:
+            0 0 20px rgba(249,199,79,0.9),
+            0 0 40px rgba(249,199,79,0.6),
+            0 10px 30px rgba(0,0,0,0.15);
+    }
+}
+
+.cupido{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border:none;
+    box-shadow:none;
+    border-radius:15px;
+    margin-left:90px;
+    vertical-align:middle;
+}
+.coracoes-fundo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    opacity:0.08;
+    font-size:40px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    animation:flutuar 8s infinite alternate;
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(200px) scale(0.8);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+.envelope-container{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(255,248,225,0.97);
+    z-index:9999;
+    animation:sumirEnvelope 3s forwards;
+}
+
+.envelope{
+    width:220px;
+    height:140px;
+    background:linear-gradient(135deg,#f9c74f,#f9a825);
+    border-radius:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:70px;
+
+    box-shadow:
+        0 0 25px rgba(249,199,79,0.8),
+        0 0 50px rgba(249,199,79,0.5);
+
+    animation:
+        pulsarEnvelope 1.5s infinite,
+        abrirCarta 3s forwards;
+}
+
+@keyframes pulsarEnvelope{
+    50%{
+        transform:scale(1.08);
+    }
+}
+
+@keyframes abrirCarta{
+    0%{
+        transform:scale(1);
+    }
+
+    60%{
+        transform:scale(1.15);
+    }
+
+    100%{
+        transform:scale(0);
+        opacity:0;
+    }
+}
+
+@keyframes sumirEnvelope{
+    0%,80%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        visibility:hidden;
+    }
+}
+
+button{
+    display:block;
+    margin:30px auto 0;
+    padding:15px 35px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#f9c74f,#f9a825);
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(249,199,79,0.6);
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 25px rgba(249,199,79,0.9);
+}
+.foto-container{
+    position:relative;
+}
+
+.legenda-foto{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(0,0,0,0.55);
+    color:white;
+    padding:8px;
+    font-size:0.8rem;
+    text-align:center;
+    border-radius:0 0 15px 15px;
+}
 </style>
 </head>
 
@@ -102,39 +315,75 @@ p{
 <div class="carta">
 
 <h1>Feliz Dia dos Namorados 💛</h1>
-
+<p style="text-align:center;font-size:18px;color:#f9a825;">
+<p style="text-align:center;font-size:18px;color:#f9a825;">
+❤️ Há 297 dias vivendo a melhor história da minha vida ao seu lado ❤️
+</p>
+</p>
+<div>
 <p>
 Meu amor, <span class="nome">Mireli</span> 💛
+<img src="anjo.jpeg" class="cupido">
+</p>
+</div>
+<p>
+Hoje é um dia especial, mas a verdade é que todos os dias se tornam especiais porque você faz parte deles, eu espero que não seja o ultimo.
 </p>
 
 <p>
-Сегодня особенный день, но правда в том, что каждый день становится особенным, потому что ты являешься его частью..
+Eu não consegueria viver sem vc amor, vc é muito especial para mim, sem vc eu não seria nada, se eu pode-se reviver igual o subaru eu sempre escolheria o Mesmo caminho continuar ao seu lado eu teria feito outras escolhas que não causaria brigas e intrigas entre nós mas eu não me arrependo de ter falado sim para vc no dia 19/08/2025 em uma terça feira a tarde era ai pelas 15:59 talvez 16:00, eu nunca vou me arrepender pois foi a melhor coisa que ja aconteceu comigo 
+</p>
+
+
+<p>
+Quero agradecer por cada sorriso, cada conversa, cada momento e por todo o carinho que você me dá. Você ilumina minha vida de um jeito que nenhuma outra pessoa consegue.
 </p>
 
 <p>
-Я хочу поблагодарить тебя за каждую улыбку, каждый разговор, каждый миг и за всю ту любовь, которую ты мне даришь. Ты озаряешь мою жизнь так, как никто другой не может..
+Mesmo quando as coisas estão feias , ter você ao meu lado inlumina o meu dia e a minha noite. Seu jeito, sua presença e seu amor tornam meus dias mais felizes.
 </p>
 
 <p>
-Даже когда всё не идеально, твоё присутствие рядом делает всё стоящим. Твоя личность, твоё присутствие и твоя любовь делают мои дни счастливее..
+Que este seja apenas mais um dos muitos Dias dos Namorados que vamos celebrar juntos. Eu te amo mais do que palavras conseguem espressar oq eu sinto por vc, vc é a razão de eu acorda todo dia e ir olhar o celular esperando mensagem sua de bom dia ou até msm mensagem de ontem pois cada letra sua escrita ou digitada melhora o meu dia de um jeito estrondoso.
 </p>
 
 <p>
-Пусть этот День святого Валентина станет лишь одним из многих, которые мы отметим вместе. Я люблю тебя больше, чем можно выразить словами..
-</p>
-
-<p>
-С любовью, сегодня и всегда. ❤️
+Com todo o meu amor, hoje e para todo sempre. ❤️
 </p>
 
 <div class="assinatura">
 Com amor,<br>
-Cezar💛
+Cezar 💛
 </div>
 
 <div class="coracoes">
 ❤️ 💛 ❤️ 💛 ❤️
 </div>
+
+
+<div class="fotos">
+
+    <div class="foto-container">
+        <img src="1.jpg" class="foto">
+        <div class="legenda-foto">❤️ No aniversario do seu pai❤️</div>
+    </div>
+
+    <div class="coracao-foto">❤️</div>
+
+    <div class="foto-container">
+        <img src="2.jpg" class="foto">
+        <div class="legenda-foto">📸 Nossa primeira foto juntos 💛</div>
+    </div>
+<div class="coracoes">
+❤️ 💛 ❤️ 💛 ❤️
+</div>
+
+</div>
+
+</body>
+</html>
+
+
 
 </div>
 
